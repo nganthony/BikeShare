@@ -36,4 +36,16 @@
         self.stationName = dictionary[@"stationName"];
     }
 }
+
+- (NSString *)convertDistanceToString {
+    int kilometers = [self.distance doubleValue] / 1000;
+    
+    if(kilometers == 0) {
+        return [NSString stringWithFormat:@"%d m", (int)[self.distance doubleValue]];
+    }
+    else {
+        return [NSString stringWithFormat:@"%d km", kilometers];
+    }
+}
+
 @end

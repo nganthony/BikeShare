@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9203F4671C7BF02B00673634 /* StationInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9203F4661C7BF02B00673634 /* StationInfoView.xib */; };
+		9203F46A1C7BFC0300673634 /* StationInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9203F4691C7BFC0300673634 /* StationInfoView.m */; };
 		920855431C75492B003F44DE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 920855421C75492B003F44DE /* main.m */; };
 		920855461C75492B003F44DE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 920855451C75492B003F44DE /* AppDelegate.m */; };
 		9208554C1C75492B003F44DE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9208554A1C75492B003F44DE /* Main.storyboard */; };
@@ -43,6 +45,9 @@
 
 /* Begin PBXFileReference section */
 		86847C9FF203DAA47D41C7AF /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		9203F4661C7BF02B00673634 /* StationInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StationInfoView.xib; sourceTree = "<group>"; };
+		9203F4681C7BFC0300673634 /* StationInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StationInfoView.h; sourceTree = "<group>"; };
+		9203F4691C7BFC0300673634 /* StationInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StationInfoView.m; sourceTree = "<group>"; };
 		9208553E1C75492B003F44DE /* BikeShare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BikeShare.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		920855421C75492B003F44DE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		920855441C75492B003F44DE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -145,6 +150,9 @@
 				920855921C76D88F003F44DE /* BSStationTableViewCell.m */,
 				920855941C78A75C003F44DE /* BSMapViewController.h */,
 				920855951C78A75C003F44DE /* BSMapViewController.m */,
+				9203F4661C7BF02B00673634 /* StationInfoView.xib */,
+				9203F4681C7BFC0300673634 /* StationInfoView.h */,
+				9203F4691C7BFC0300673634 /* StationInfoView.m */,
 			);
 			path = BikeShare;
 			sourceTree = "<group>";
@@ -298,6 +306,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9203F4671C7BF02B00673634 /* StationInfoView.xib in Resources */,
 				920855541C75492B003F44DE /* LaunchScreen.storyboard in Resources */,
 				920855511C75492B003F44DE /* Assets.xcassets in Resources */,
 				9208554C1C75492B003F44DE /* Main.storyboard in Resources */,
@@ -363,6 +372,7 @@
 				920855971C78A75C003F44DE /* BSMapViewController.m in Sources */,
 				92A5338C1C792601008DF64D /* BSStation+CoreDataProperties.m in Sources */,
 				92A5338D1C792601008DF64D /* BSStation.m in Sources */,
+				9203F46A1C7BFC0300673634 /* StationInfoView.m in Sources */,
 				9208558A1C758006003F44DE /* BSStationTableViewController.m in Sources */,
 				920855461C75492B003F44DE /* AppDelegate.m in Sources */,
 				9208557E1C756E24003F44DE /* BSRequestManager.m in Sources */,

@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface BSStation : NSManagedObject
 
 - (void)unpackDictionary:(NSDictionary *)dictionary;
+- (NSString *)convertDistanceToString;
 
 @end
 

@@ -27,7 +27,7 @@
     self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
     [self.locationManager startUpdatingLocation];
     
-    [GMSServices provideAPIKey:@"INSERT_YOUR_OWN_GOOGLE_MAPS_API_KEY"];
+    [GMSServices provideAPIKey:@"AIzaSyDDB0SmfV_J__POLwuYksPyp8JdnpFGXwY"];
     
     UINavigationController *stationNavigationController = (UINavigationController *)self.window.rootViewController;
     BSStationTableViewController *stationTableViewController = (BSStationTableViewController *)[stationNavigationController topViewController];

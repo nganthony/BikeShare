@@ -13,9 +13,10 @@
 #import "BSStationTableViewCell.h"
 #import "BSStation.h"
 #import "BSMapViewController.h"
+#import "StationInfoView.h"
 @import GoogleMaps;
 
-@interface BSStationTableViewController () <NSFetchedResultsControllerDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface BSStationTableViewController () <NSFetchedResultsControllerDelegate, UITableViewDelegate, UITableViewDataSource, GMSMapViewDelegate>
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (strong, nonatomic) BSStation *selectedStation;
@@ -25,9 +26,13 @@
 @property (strong, nonatomic) IBOutlet UINavigationItem *navigationItem;
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
+@property (nonatomic) BOOL animatedToCurrentPosition;
+
 @end
 
-@implementation BSStationTableViewController
+@implementation BSStationTableViewController {
+    StationInfoView *stationInfoView;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -40,6 +45,7 @@
     self.mapView.myLocationEnabled = YES;
     self.mapView.settings.compassButton = YES;
     self.mapView.settings.myLocationButton = YES;
+    self.mapView.delegate = self;
     
     // Initialize Fetch Request
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"BSStation"];
@@ -53,14 +59,26 @@
     // Configure Fetched Results Controller
     [self.fetchedResultsController setDelegate:self];
     
+    // Add refresh button to navigation bar
     UIBarButtonItem *refreshButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refresh:)];    
     self.navigationItem.rightBarButtonItem = refreshButton;
     
     [self getAllStations];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    // Register observer for current location
+    [self.mapView addObserver:self forKeyPath:@"myLocation" options:NSKeyValueObservingOptionNew context: nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    // Remove observer for current location
+    [self.mapView removeObserver:self forKeyPath:@"myLocation"];
 }
 
 // Gets all bike stations from API
@@ -88,15 +106,12 @@
                 marker.position = CLLocationCoordinate2DMake([[station latitude] doubleValue], [[station longitude] doubleValue]);
                 marker.title = [station stationName];
                 marker.map = self.mapView;
+                marker.userData = station;
             }
             
             [self updateStationDistance];
-            [self animateToCurrentPosition];
 
             [self.tableView reloadData];
-            
-            // Register observer for current location
-            [self.mapView addObserver:self forKeyPath:@"myLocation" options:NSKeyValueObservingOptionNew context: nil];
         }
         
         self.activityIndicator.hidden = YES;
@@ -127,15 +142,7 @@
     cell.stationNameLabel.text = [station stationName];
     cell.bikeLabel.text = [[station availableBikes] stringValue];
     cell.dockLabel.text = [[station availableDocks] stringValue];
-    
-    int kilometers = [station.distance doubleValue] / 1000;
-    
-    if(kilometers == 0) {
-        cell.distanceLabel.text = [NSString stringWithFormat:@"%d m", (int)[station.distance doubleValue]];
-    }
-    else {
-        cell.distanceLabel.text = [NSString stringWithFormat:@"%d km", kilometers];
-    }
+    cell.distanceLabel.text = [station convertDistanceToString];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -210,20 +217,37 @@
     UISegmentedControl *segmentedControl = sender;
     
     switch (segmentedControl.selectedSegmentIndex) {
+        // Stations
         case 0:
             self.tableView.hidden = NO;
             self.mapView.hidden = YES;
             self.pricingView.hidden = YES;
+            
+            if(stationInfoView) {
+                [stationInfoView setHidden: YES];
+            }
             break;
+            
+        // Map
         case 1:
             self.tableView.hidden = YES;
             self.mapView.hidden = NO;
             self.pricingView.hidden = YES;
+            
+            if(stationInfoView) {
+                [stationInfoView setHidden: NO];
+            }
             break;
+            
+        // Pricing
         case 2:
             self.tableView.hidden = YES;
             self.mapView.hidden = YES;
             self.pricingView.hidden = NO;
+            
+            if(stationInfoView) {
+                [stationInfoView setHidden: YES];
+            }
             break;
         default:
             break;
@@ -236,11 +260,6 @@
     [self getAllStations];
 }
 
-// Handler for info button
-- (void) infoButtonAction {
-    
-}
-
 #pragma mark - Google maps methods
 
 // Observer for Google maps
@@ -248,14 +267,17 @@
 {
     if ([keyPath isEqualToString:@"myLocation"] && [object isKindOfClass:[GMSMapView class]])
     {
-        [self.mapView animateToCameraPosition:[GMSCameraPosition cameraWithLatitude:self.mapView.myLocation.coordinate.latitude
-                                                                          longitude:self.mapView.myLocation.coordinate.longitude
-                                                                               zoom:15]];
+        if(![self animatedToCurrentPosition]) {
+            [self.mapView animateToCameraPosition:[GMSCameraPosition cameraWithLatitude:self.mapView.myLocation.coordinate.latitude
+                                                                              longitude:self.mapView.myLocation.coordinate.longitude
+                                                                                   zoom:15]];
+            
+            // Only animate to current position once
+            self.animatedToCurrentPosition = YES;
+        }
+        
         [self updateStationDistance];
         [self.tableView reloadData];
-        
-        // Unregister observer for current location
-        [self.mapView removeObserver:self forKeyPath:@"myLocation"];
     }
 }
 
@@ -276,6 +298,55 @@
     [self.mapView animateToCameraPosition:[GMSCameraPosition cameraWithLatitude:self.mapView.myLocation.coordinate.latitude
                                                                       longitude:self.mapView.myLocation.coordinate.longitude
                                                                            zoom:15]];
+}
+
+
+// Marker map click delegate method
+- (BOOL)mapView:(GMSMapView *)mapView didTapMarker:(GMSMarker *)marker {
+    // Remove the existing info view
+    if(stationInfoView) {
+        [UIView animateWithDuration:0.3
+                              delay:0
+                            options: UIViewAnimationOptionCurveEaseIn
+                         animations:^{
+                             stationInfoView.frame = CGRectMake(0, - (self.view.frame.size.height / 8), self.view.frame.size.width, self.view.frame.size.height / 8);
+                         }
+                         completion:^(BOOL finished){
+                             [stationInfoView removeFromSuperview];
+                             [self addStationInfoView:marker.userData];
+                         }];
+    }
+    else {
+        [self addStationInfoView:marker.userData];
+    }
+    
+    return NO;
+}
+
+// Adds station info view to map view when a marker is clicked
+- (void) addStationInfoView:(BSStation *)station {
+    stationInfoView = [[[NSBundle mainBundle] loadNibNamed:@"StationInfoView"
+                                                     owner:self
+                                                   options:nil]
+                       objectAtIndex:0];
+    
+    stationInfoView.frame = CGRectMake(0, - (self.view.frame.size.height / 8), self.view.frame.size.width, self.view.frame.size.height / 8);
+    
+    stationInfoView.bikes.text = [station.availableBikes stringValue];
+    stationInfoView.docks.text = [station.availableDocks stringValue];
+    stationInfoView.distance.text = [station convertDistanceToString];
+    
+    // Animate view to drop down from navigation bar
+    [UIView animateWithDuration:0.3
+                          delay:0
+                        options: UIViewAnimationOptionCurveEaseIn
+                     animations:^{
+                         stationInfoView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height / 8);
+                     }
+                     completion:^(BOOL finished){
+                     }];
+    
+    [self.view addSubview:stationInfoView];
 }
 
 @end

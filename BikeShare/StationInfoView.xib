@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1605" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="StationInfoView">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bikes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wfV-Rr-GCS" userLabel="Bikes Label">
+                    <rect key="frame" x="107" y="274" width="41" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Docks" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oPE-J7-F4P" userLabel="Docks Label">
+                    <rect key="frame" x="276" y="274" width="48" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TLP-zJ-SX9" userLabel="Distance Label">
+                    <rect key="frame" x="444" y="274" width="67" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="waq-92-7rW" userLabel="Bikes">
+                    <rect key="frame" x="107" y="303" width="42" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cl1-uF-0sD" userLabel="Docks">
+                    <rect key="frame" x="279" y="303" width="42" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LLS-nk-28E" userLabel="Distance">
+                    <rect key="frame" x="456" y="303" width="42" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_directions_bike" translatesAutoresizingMaskIntoConstraints="NO" id="DAZ-27-KGx">
+                    <rect key="frame" x="157" y="305" width="18" height="18"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="18" id="8zK-4c-xtc"/>
+                        <constraint firstAttribute="height" constant="18" id="JJF-De-0tI"/>
+                    </constraints>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_local_parking" translatesAutoresizingMaskIntoConstraints="NO" id="2z1-LD-52Z">
+                    <rect key="frame" x="329" y="305" width="18" height="18"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="18" id="35u-2n-sug"/>
+                        <constraint firstAttribute="height" constant="18" id="DQB-d1-0rs"/>
+                    </constraints>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="oPE-J7-F4P" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="-16" id="1ZB-F8-oZK"/>
+                <constraint firstItem="cl1-uF-0sD" firstAttribute="centerX" secondItem="oPE-J7-F4P" secondAttribute="centerX" id="3o0-EY-ny9"/>
+                <constraint firstItem="TLP-zJ-SX9" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="trailingMargin" multiplier="3:4" id="AzJ-nl-Z8p"/>
+                <constraint firstItem="oPE-J7-F4P" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="trailing" multiplier="2:4" id="B8U-xU-iJk"/>
+                <constraint firstItem="DAZ-27-KGx" firstAttribute="centerY" secondItem="waq-92-7rW" secondAttribute="centerY" id="CrB-Vs-3CZ"/>
+                <constraint firstItem="TLP-zJ-SX9" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="-16" id="LSI-fP-2ug"/>
+                <constraint firstItem="waq-92-7rW" firstAttribute="centerX" secondItem="wfV-Rr-GCS" secondAttribute="centerX" id="NqG-pt-9DN"/>
+                <constraint firstItem="cl1-uF-0sD" firstAttribute="top" secondItem="oPE-J7-F4P" secondAttribute="bottom" constant="8" id="PKQ-iE-x5s"/>
+                <constraint firstItem="DAZ-27-KGx" firstAttribute="leading" secondItem="waq-92-7rW" secondAttribute="trailing" constant="8" id="RnB-cf-1Th"/>
+                <constraint firstItem="wfV-Rr-GCS" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailingMargin" multiplier="1:4" id="T7Y-F3-e82"/>
+                <constraint firstItem="LLS-nk-28E" firstAttribute="centerX" secondItem="TLP-zJ-SX9" secondAttribute="centerX" id="T8C-De-bfl"/>
+                <constraint firstItem="waq-92-7rW" firstAttribute="top" secondItem="wfV-Rr-GCS" secondAttribute="bottom" constant="8" id="Z8J-4Q-UVn"/>
+                <constraint firstItem="2z1-LD-52Z" firstAttribute="centerY" secondItem="cl1-uF-0sD" secondAttribute="centerY" id="gWJ-RO-h3N"/>
+                <constraint firstItem="LLS-nk-28E" firstAttribute="top" secondItem="TLP-zJ-SX9" secondAttribute="bottom" constant="8" id="o4F-Gl-Xfu"/>
+                <constraint firstItem="wfV-Rr-GCS" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="-16" id="pr6-wY-koh"/>
+                <constraint firstItem="2z1-LD-52Z" firstAttribute="leading" secondItem="cl1-uF-0sD" secondAttribute="trailing" constant="8" id="v2d-on-9iV"/>
+            </constraints>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBound" value="NO"/>
+                <userDefinedRuntimeAttribute type="size" keyPath="layer.shadowOffset">
+                    <size key="value" width="0.0" height="5"/>
+                </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="number" keyPath="layer.shadowOpacity">
+                    <real key="value" value="0.5"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
+            <connections>
+                <outlet property="bikes" destination="waq-92-7rW" id="cVm-GQ-zXx"/>
+                <outlet property="distance" destination="LLS-nk-28E" id="5OP-5t-BXz"/>
+                <outlet property="docks" destination="cl1-uF-0sD" id="fco-WA-FvC"/>
+            </connections>
+        </view>
+    </objects>
+    <resources>
+        <image name="ic_directions_bike" width="24" height="24"/>
+        <image name="ic_local_parking" width="24" height="24"/>
+    </resources>
+</document>
