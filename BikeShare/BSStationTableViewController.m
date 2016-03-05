@@ -275,9 +275,6 @@
             // Only animate to current position once
             self.animatedToCurrentPosition = YES;
         }
-        
-        [self updateStationDistance];
-        [self.tableView reloadData];
     }
 }
 
